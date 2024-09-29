@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from django.core.validators import MaxValueValidator, RegexValidator
+from django.core.validators import RegexValidator, MaxLengthValidator
 
 from taxi.models import Driver, Car
 
@@ -10,7 +10,7 @@ class DriverCreationForm(UserCreationForm):
     MIN_LICENSE_NUMBER = 8
 
     license_number = forms.CharField(
-        validators=[MaxValueValidator(MIN_LICENSE_NUMBER),
+        validators=[MaxLengthValidator(MIN_LICENSE_NUMBER),
                     RegexValidator(regex=r"^[A-Z]{3}\d{5}$")]
     )
 
@@ -23,7 +23,7 @@ class DriverLicenseUpdateForm(forms.ModelForm):
     MIN_LICENSE_NUMBER = 8
 
     license_number = forms.CharField(
-        validators=[MaxValueValidator(MIN_LICENSE_NUMBER),
+        validators=[MaxLengthValidator(MIN_LICENSE_NUMBER),
                     RegexValidator(regex=r"^[A-Z]{3}\d{5}$")]
     )
 
